@@ -1,0 +1,45 @@
+{
+	"name": "cccompiler",
+	"version": "0.0.0",
+	"description": "CC's C - EVM compiler",
+	"scripts": {
+		"all": "npm run npmignore && npm run eslint && npm run coverage",
+		"coverage": "./node_modules/.bin/nyc -r none npm test ; ./node_modules/.bin/nyc report -r lcov -r text -r text-summary",
+		"debug": "node --inspect-brk ./node_modules/.bin/_mocha test",
+		"eslint": "./node_modules/.bin/eslint *.js lib/*js test/*js",
+		"fastest": "SKIP_SLOW_TESTS=1 npm test",
+		"npmignore": "echo '.codeclimate.yml\\n.eslintrc\\n.git*\\n.travis.yml\\n.vscode\\nMakefile\\ndocs\\ntest\\nreverse*' > .npmignore ; cat .gitignore >> .npmignore",
+		"postinstall": "rm -rfv node_modules/websocket/.git",
+		"test": "./node_modules/.bin/_mocha test"
+	},
+	"bin": {
+		"ccc": "./ccc.js"
+	},
+	"bugs": "https://github.com/iccicci/ccc/issues",
+	"repository": "https://github.com/iccicci/ccc",
+	"keywords": [
+		"compiler",
+		"ethereum",
+		"evm"
+	],
+	"engines": {
+		"node": ">=8.0"
+	},
+	"author": "Daniele Ricci <daniele.icc@gmail.com> (https://github.com/iccicci)",
+	"contributors": [
+		"cicci"
+	],
+	"license": "MIT",
+	"readmeFilename": "README.md",
+	"homepage": "http://ccc.readthedocs.io/en/latest/",
+	"dependencies": {
+		"bn.js": "5.0.0",
+		"web3": "1.0.0-beta.46"
+	},
+	"devDependencies": {
+		"eslint": "6.3.0",
+		"ganache-cli": "6.7.0",
+		"mocha": "6.2.0",
+		"nyc": "14.1.1"
+	}
+}
