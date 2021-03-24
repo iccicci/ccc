@@ -1,15 +1,14 @@
 {
-	"editor.formatOnSave": true,
-	"eslint.autoFixOnSave": true,
-	"eslint.alwaysShowStatus": true,
-	"explorer.confirmDelete": false,
-	"files.eol": "\n",
-	"files.insertFinalNewline": true,
-	"files.trimFinalNewlines": true,
-	"git.ignoreMissingGitWarning": true,
-	"prettier.eslintIntegration": true,
-	"prettier.jsxBracketSameLine": true,
-	"prettier.printWidth": 200,
-	"prettier.useTabs": true,
-	"window.zoomLevel": 0
+  "editor.codeActionsOnSave": ["source.formatDocument", "source.fixAll.eslint"],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.debug": true,
+  "eslint.validate": ["javascript"],
+  "explorer.confirmDelete": false,
+  "files.autoSave": "off",
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "[javascript]": { "editor.formatOnSave": false }
 }
