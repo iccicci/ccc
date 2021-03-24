@@ -8,7 +8,7 @@ before_script:
 
 env:
   global:
-    - CODECLIMATE_REPO_TOKEN=850b9d6e5ffc53ec18a7d513c19401ce553856315e35e737e5be75e5b6f04f4f
+    - CC_TEST_REPORTER_ID=850b9d6e5ffc53ec18a7d513c19401ce553856315e35e737e5be75e5b6f04f4f
 
 sudo: false
 
