@@ -1,11 +1,13 @@
 typedef int8 test;
 
-test    a     storage export;
-uint32  b[]   storage export;
-bytes20 c[][] storage export;
+contract trest {
+  test a storage export;
+  uint32 b[int8] storage export;
+  bytes20 c[int8][uint32] storage export;
 
-void main(void) {
-	a         = 23;
-	b[23]     = 42;
-	c[23][42] = "test";
-}
+  void main() {
+    a = 23;
+    b[23] = 42;
+    c[23][42] = "test";
+  }
+};

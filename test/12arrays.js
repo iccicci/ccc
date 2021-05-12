@@ -48,23 +48,26 @@ describe("arrays and initializations", () => {
     before(src("contract {\nexport storage uint8 z;\nint8 a =;\nint8 a = 8 + {;\n};\n", cmp));
 
     it("int8 a =;", () => eq(err(), "ccc:error:src:3:9:unexpected end of expression"));
-    it("int8 a = 8 + {;", () => eq(err(), "ccc:error:src:4:14:unexpected end of expression"));
+    it("int8 a = 8 + {; (1)", () => eq(err(), "ccc:error:src:4:14:unexpected end of expression"));
+    it("int8 a = 8 + {; (2)", () => eq(err(), "ccc:error:src:4:14:unexpected token when declaration or '}' expected: '{'"));
+    it("int8 a = 8 + {; (3)", () => eq(err(), "ccc:error:src:5:1:unexpected token in expression: '}'"));
     it("messages count", () => deq(messages, []));
   });
 
   describe("global arrays", () => {
-    before(src("contract {\nexport storage uint8 z;\nint8 a[8];\nint8 b[int8] storage;\n};\n", cmp));
+    before(src("contract {\nexport storage uint8 z;\nint8 a[8];\nint8 b[int8] storage;\nint8 c;\n};\n", cmp));
 
-    it("int8 a[8];", () => deq(variables.a, { type: int8, name: "a", dim: [{ constant: true, hex: "0x8" }] }));
-    it("int8 b[int8] storage;", () => deq(variables.b, { type: int8, name: "b", storage: true, dim: [{ isType: true, type: "int8" }] }));
+    it("int8 a[8];", () => deq(variables.a, { type: int8, mmap: 0, name: "a", dim: [{ constant: true, hex: "0x8" }] }));
+    it("int8 b[int8] storage;", () => deq(variables.b, { type: int8, smap: 1, name: "b", storage: true, dim: [{ isType: true, type: "int8" }] }));
+    it("int8 c;", () => deq(variables.c, { lvalue: true, type: int8, mmap: 256, name: "c" }));
     it("messages count", () => deq(messages, []));
   });
 
   describe("initializations", () => {
     before(src("contract {\nexport storage uint8 z;\nint8 a = 8;\nint8 b = 8 + 8;\n};\n", cmp));
 
-    it("int8 a = 8;", () => deq(variables.a, { type: int8, name: "a", val: "0x8" }));
-    it("int8 b = 8 + 8;", () => deq(variables.b, { type: int8, name: "b", val: "0x10" }));
+    it("int8 a = 8;", () => deq(variables.a, { lvalue: true, mmap: 0, name: "a", type: int8, val: "0x8" }));
+    it("int8 b = 8 + 8;", () => deq(variables.b, { lvalue: true, mmap: 32, name: "b", type: int8, val: "0x10" }));
     it("messages count", () => deq(messages, []));
   });
 });

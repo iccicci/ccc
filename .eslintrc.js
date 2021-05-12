@@ -10,6 +10,7 @@ const rules = {
   "linebreak-style":                  ["warn", "unix"],
   "no-console":                       "warn",
   "no-mixed-spaces-and-tabs":         ["error", "smart-tabs"],
+  "no-undef":                         "error",
   "nonblock-statement-body-position": ["error", "beside"],
   semi:                               ["error", "always"],
   "space-before-function-paren":      ["error", { anonymous: "never", asyncArrow: "always", named: "never" }],
@@ -18,6 +19,6 @@ const rules = {
 
 module.exports = {
   parserOptions: { ecmaVersion: 2020 },
-  env:           { es6: true },
+  env:           { es6: true, mocha: true, node: true },
   rules
 };
