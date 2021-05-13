@@ -20,6 +20,7 @@ describe("increments & decrements", () => {
     ["int8 aa = 8;", null, { lvalue: true, mmap: 0, name: "aa", type: Types.int8, val: "0x8" }],
     ["&aa++;", "ccc:error:src:3:1:right operand of operator '&' must be an lvalue"],
     ["int8 ab = ++aa++;", "ccc:error:src:4:11:right operand of operator '++' must be an lvalue"],
+    ["int8 ab = aa----;", "ccc:error:src:5:15:left operand of operator '--' is not an lvalue"],
     /*
     ["uint8 aa = -8;", "ccc:warning:src:3:10:type sign mismatch in assignment"],
     ["aa += 8;", "ccc:error:src:4:4:operator not yet implemented: '+='"],

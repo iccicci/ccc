@@ -13,6 +13,7 @@ describe("arrays and initializations", () => {
   let messages, variables;
   const cmp = () => {
     ({ messages } = ccc("src", { keep: true }));
+    // eslint-disable-next-line no-undef
     ({ variables } = scope.contracts.default.scope);
   };
   const err = () => messages.shift();
@@ -57,8 +58,8 @@ describe("arrays and initializations", () => {
   describe("global arrays", () => {
     before(src("contract {\nexport storage uint8 z;\nint8 a[8];\nint8 b[int8] storage;\nint8 c;\n};\n", cmp));
 
-    it("int8 a[8];", () => deq(variables.a, { type: int8, mmap: 0, name: "a", dim: [{ constant: true, hex: "0x8" }] }));
-    it("int8 b[int8] storage;", () => deq(variables.b, { type: int8, smap: 1, name: "b", storage: true, dim: [{ isType: true, type: "int8" }] }));
+    it("int8 a[8];", () => deq(variables.a, { mmap: 0, name: "a", type: { deref: int8, pointer: true, short: "A4i1x8", size: 256, type: "int8[0x8]" } }));
+    it("int8 b[int8] storage;", () => deq(variables.b, { smap: 1, name: "b", storage: true, type: { deref: int8, pointer: true, short: "A4i1i1", type: "int8[int8]" } }));
     it("int8 c;", () => deq(variables.c, { lvalue: true, type: int8, mmap: 256, name: "c" }));
     it("messages count", () => deq(messages, []));
   });

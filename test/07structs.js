@@ -43,11 +43,7 @@ describe("structs", () => {
         attrs: [
           { type: Types.uint16, name: "a", offset: 0 },
           {
-            dim: [
-              { constant: true, hex: "0x4" },
-              { constant: true, hex: "0x3" }
-            ],
-            type:   int32,
+            type:   { deref: { deref: int32, pointer: true, short: "A4i4x4", size: 128, type: "int32[0x4]" }, pointer: true, short: "A8A4i4x4x3", size: 384, type: "int32[0x4][0x3]" },
             name:   "b",
             offset: 1
           },
@@ -148,20 +144,28 @@ describe("structs", () => {
             name:   "b",
             offset: 1,
             type:   {
-              attrs: [
-                { name: "a", offset: 0, type: address },
-                { name: "b", offset: 1, type: address }
-              ],
-              defined: true,
-              short:   "S2aa",
-              size:    64,
-              struct:  true,
-              type:    "struct { address; address; }"
-            },
-            dim: [
-              { constant: true, hex: "0x3" },
-              { constant: true, hex: "0x2" }
-            ]
+              deref: {
+                deref: {
+                  attrs: [
+                    { name: "a", offset: 0, type: address },
+                    { name: "b", offset: 1, type: address }
+                  ],
+                  defined: true,
+                  short:   "S2aa",
+                  size:    64,
+                  struct:  true,
+                  type:    "struct { address; address; }"
+                },
+                pointer: true,
+                short:   "A6S2aax3",
+                size:    192,
+                type:    "struct { address; address; }[0x3]"
+              },
+              pointer: true,
+              short:   "A10A6S2aax3x2",
+              size:    384,
+              type:    "struct { address; address; }[0x3][0x2]"
+            }
           },
           { name: "c", offset: 13, type: uint40 }
         ],
