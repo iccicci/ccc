@@ -11,6 +11,7 @@ describe("expression errors", () => {
   let messages, variables;
   const cmp = () => {
     ({ messages } = ccc("src", { keep: true }));
+    // eslint-disable-next-line no-undef
     ({ variables } = scope.contracts.default.scope);
   };
   const err = () => messages.shift();

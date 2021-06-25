@@ -14,6 +14,7 @@ describe("constant expressions", () => {
   let variables;
   const cmp = () => {
     ({ messages } = ccc("src", { keep: true }));
+    // eslint-disable-next-line no-undef
     ({ variables } = scope.contracts.default.scope);
   };
   const tests = [
